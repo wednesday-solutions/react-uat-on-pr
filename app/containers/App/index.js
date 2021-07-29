@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route , useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import map from 'lodash/map';
@@ -21,16 +21,25 @@ import { colors } from '@themes';
 import Header from '@components/Header';
 import For from '@components/For';
 
+
 const theme = {
   fg: colors.primary,
   bg: colors.secondary
 };
 
-export function App({ location }) {
+export function App({ history, location }) {
   return (
     <ThemeProvider theme={theme}>
       <Header />
       <Layout.Content>
+        <button
+          style={{ margin: '20px' }}
+          onClick={() => {
+            history.push(routeConfig.newHomePath.route);
+          }}
+        >
+          Go to the new route
+        </button>
         <For
           ParentComponent={props => <Switch {...props} />}
           of={map(Object.keys(routeConfig))}
