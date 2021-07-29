@@ -1,7 +1,7 @@
 name: Continuous Deployment on PR
 # 1
 on:
-	pull_request:
+  pull_request:
     branches:
       - master
 
