@@ -1,10 +1,7 @@
 name: Continuous Deployment on PR
-# 1
 on:
 	pull_request:
-    branches:
-      - master
-
+    branches: [master]
 jobs:
   deploy:
     name: Deploy
@@ -12,7 +9,7 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
-    env: #2
+    env: 
       SOURCE_DIR: './build/'
       AWS_REGION: ${{ secrets.AWS_REGION }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
@@ -20,15 +17,15 @@ jobs:
       PATHS: '/*'
       AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
     steps:
-      - uses: actions/checkout@v1 #1
-      - name: Get branch name #2
+      - uses: actions/checkout@v1 
+      - name: Get branch name 
         id: vars
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      - name: Install dependencies #33
+      - name: Install dependencies 
         run: yarn
-      - name: Build # 4
+      - name: Build 
         run: yarn build:uat
-      - name: AWS Deploy #5
+      - name: AWS Deploy 
         uses: jakejarvis/s3-sync-action@v0.5.0
         with:
           args: --acl public-read --follow-symlinks
