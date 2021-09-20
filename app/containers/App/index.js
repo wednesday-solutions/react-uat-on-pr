@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { Switch, Route , useLocation } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import map from 'lodash/map';
@@ -20,7 +20,6 @@ import GlobalStyle from '@app/global-styles';
 import { colors } from '@themes';
 import Header from '@components/Header';
 import For from '@components/For';
-
 
 const theme = {
   fg: colors.primary,
@@ -41,7 +40,7 @@ export function App({ history, location }) {
           Go to the new route
         </button>
         <For
-          ParentComponent={props => <Switch {...props} />}
+          ParentComponent={(props) => <Switch {...props} />}
           of={map(Object.keys(routeConfig))}
           renderItem={(routeKey, index) => {
             const Component = routeConfig[routeKey].component;
@@ -50,7 +49,7 @@ export function App({ history, location }) {
                 exact={routeConfig[routeKey].exact}
                 key={index}
                 path={routeConfig[routeKey].route}
-                render={props => {
+                render={(props) => {
                   const updatedProps = {
                     ...props,
                     ...routeConfig[routeKey].props
@@ -67,6 +66,7 @@ export function App({ history, location }) {
   );
 }
 App.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
+  history: PropTypes.object
 };
 export default compose(withRouter)(App);

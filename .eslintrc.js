@@ -21,8 +21,7 @@ module.exports = {
     'react/display-name': 0,
     curly: ['error', 'all'],
     'no-console': ['error', { allow: ['error'] }],
-    'key-spacing': [2, { beforeColon: false, afterColon: true }],
-    'arrow-parens': ['error', 'as-needed']
+    'key-spacing': [2, { beforeColon: false, afterColon: true }]
   },
   globals: {
     GLOBAL: false,
